@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PriceTag from "./styles/PriceTag";
 import Link from 'next/link';
 import formatMoney from '../lib/formatMoney';
 import styled from "styled-components";
@@ -55,6 +54,20 @@ const StyledItemTitle = styled.h3`
     width: 100%;
   }
 `;
+
+const StyledPrice = styled.span`
+  background: ${props => props.theme.red};
+  color: white;
+  font-weight: 600;
+  padding: 5px;
+  line-height: 1;
+  font-size: 3rem;
+  display: inline-block;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+`;
+
 const Item = ({ item }) => {
   return (
     <StyledItem>
@@ -68,7 +81,7 @@ const Item = ({ item }) => {
           <a>{item.title}</a>
         </Link>
       </StyledItemTitle>
-      <PriceTag>{formatMoney(item.price)}</PriceTag>
+      <StyledPrice>{formatMoney(item.price)}</StyledPrice>
       <p>{item.description}</p>
     </StyledItem>
   );
