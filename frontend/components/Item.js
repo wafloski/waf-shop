@@ -82,6 +82,7 @@ const Item = ({ item }) => {
         </Link>
       </StyledItemTitle>
       <StyledPrice>{formatMoney(item.price)}</StyledPrice>
+      <img src={item.image} alt ={item.title} />
       <p>{item.description}</p>
     </StyledItem>
   );

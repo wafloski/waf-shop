@@ -27,7 +27,7 @@ const Inner = styled.div`
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Lato';
-    src: url('https://fonts.googleapis.com/css2?family=Lato&display=swap') format('woff2');
+    src: url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400') format('ttf');
     font-weight: normal;
     font-style: normal;
   }
@@ -43,7 +43,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-size: 1.5rem;
     line-height: 2;
-    font-family: 'Lato';
+    font-family: 'Lato', sans-serif;
   }
   a {
     text-decoration: none;

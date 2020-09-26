@@ -25,6 +25,7 @@ const CREATE_ITEM_MUTATION = gql`
 `;
 
 const texts = {
+  imageField: 'Image',
   titleField: 'Title',
   priceField: 'Price',
   descriptionField: 'Description',
@@ -50,6 +51,24 @@ const CreateItem = () => {
     setItemInput({[name]: newValue});
   };
 
+  const uploadImage = async e => {
+    console.log('uploading file');
+    const images = e.target.files;
+    const data = new FormData;
+    data.append('file', images[0]);
+    data.append('upload_preset','wafshop');
+    const response = await fetch('https://api.cloudinary.com/v1_1/wafloski/image/upload', {
+      method: 'POST',
+      body: data
+    });
+    const file = await response.json();
+    console.log(file);
+    setItemInput({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url
+    });
+  };
+
   return (
     <Mutation mutation={CREATE_ITEM_MUTATION} variables={itemInput}>
       {(createSingleItem, { loading, error }) => (
@@ -60,6 +79,20 @@ const CreateItem = () => {
         }}>
           <Error error={error} />
           <fieldset disabled={loading} aria-busy={loading}>
+            <label htmlFor='image'>
+              {texts.imageField}
+              <input
+                type='file'
+                id='image'
+                name='image'
+                placeholder='Upload image'
+                required
+                onChange={uploadImage}
+              />
+              {itemInput.image && (
+                <img src={itemInput.image} alt='Upload image' />
+              )}
+            </label>
             <label htmlFor='title'>
               {texts.titleField}
               <input
